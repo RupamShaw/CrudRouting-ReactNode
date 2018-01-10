@@ -1,24 +1,69 @@
 
 function updateNewContact(contact) {
-    setState({ newContact: contact });
+  setState({ newContactForm: contact });
+}
+
+function _addValidationToContact(contact) {
+  if (!contact.name) {
+    contact.errors.name = ["Please enter your new contact's name"]
+  }
+  if (!/.+@.+\..+/.test(contact.email)) {
+    contact.errors.email = ["Please enter your new contact's email"]
+  }
+}
+function submitNewContact() {
+  var contact = Object.assign({}, state.newContactForm, { key: state.contacts.length + 1+"", errors: {} });
+  _addValidationToContact(contact);
+  //if (contact.name && contact.email) {
+  setState(
+    Object.keys(contact.errors).length === 0
+      ? {
+        newContactForm: Object.assign({}, CONTACT_TEMPLATE),
+        contacts: state.contacts.slice(0).concat(contact),
+      }
+      : { newContactForm: contact }
+  );
+}
+
+function updateContactForm(contact) {
+  var update = {};
+  update[contact.key] = contact;
+  var contactForms = Object.assign(state.contactForms, update);
+
+  setState({ contactForms: contactForms });
 }
 
 
-function submitNewContact() {
-    var contact = Object.assign({}, state.newContact, {key: state.contacts.length + 1, errors: {}});
-    if (!contact.name) {
-        contact.errors.name = ["Please enter your new contact's name"];
+function submitContactForm() {
+  // window.location.replace(
+  //     window.location.pathname + window.location.search + '#/contacts'
+  //   );
+  var key = state.location[1];
+  var contactForm = state.contactForms[key];
+
+  if (!contactForm) {
+    startNavigating('/contacts');
+  }
+  else {
+    var contact = Object.assign({}, contactForm, { errors: {} });
+
+    _addValidationToContact(contact);
+
+    var contactForms = Object.assign({}, state.contactForms);
+    var update = { contactForms: contactForms };
+
+    if (Object.keys(contact.errors).length === 0) {
+      delete contactForms[key];
+      update.contacts = state.contacts.slice(0).map(function (x) {
+        return x.key == key ? contact : x
+      });
+
+      startNavigating('/contacts');
     }
-    if (!/.+@.+\..+/.test(contact.email)) {
-        contact.errors.email = ["Please enter your new contact's email"];
+    else {
+      contactForms[key] = contact;
     }
-    //if (contact.name && contact.email) {
-    setState(
-        Object.keys(contact.errors).length === 0
-        ? {
-            newContact: Object.assign({}, CONTACT_TEMPLATE),
-            contacts: state.contacts.slice(0).concat(contact),
-            }
-        : { newContact: contact }
-    );
+
+    setState(update);
+  }
 }

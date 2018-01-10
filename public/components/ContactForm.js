@@ -78,7 +78,7 @@
                   ref:'description',
                   onChange: this.onDescriptionChange,
               }),
-              React.createElement('button', {type: 'submit'}, "Add Contact")
+              React.createElement('button', {type: 'submit'}, "Save")
               )
           )
         },
