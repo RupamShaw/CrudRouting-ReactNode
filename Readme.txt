@@ -1,5 +1,8 @@
-This repository is for Contact Crud in react with or without node /express
-used inline React and babel library
- but for easier to use added express on node.
+This is Final Contact CRUD with ReactRouting 
+
+--We can Use  without node  on express --so directly Html accesing can be used
+--used inline React and babel library
+--But for ease here I used  express on node.
+
  
-   //http://jamesknelson.com/learn-raw-react-no-jsx-flux-es6-webpack/
+   
