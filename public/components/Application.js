@@ -6,13 +6,11 @@ var Application = React.createClass({
     },
     componentWillMount: function() {
       $(function() {
-        
         console.log('get all contacts from Apllicaton compwillmount ');
            $.get('/contacts', (res) => {
-            console.log(res)
+            console.log('receive after get res contacts ',res)
             setState({contacts:res})
            })
-      
       })
     },
   

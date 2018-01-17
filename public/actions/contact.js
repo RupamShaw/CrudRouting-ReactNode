@@ -16,11 +16,6 @@ function submitNewContact() {
   var contact = Object.assign({}, state.newContactForm, { key: state.contacts.length + 1+"", errors: {} });
   _addValidationToContact(contact);
   console.log("tosave contacts name", contact.name,' objkeycontacterr lntg ',Object.keys(contact.errors).length,' contact.errors ',contact.errors )
-  // new Contact({ 
-  //   name: contact,name,
-  //   email:contact.email,
-  //   description:contact.description
-  // }).save().then((newContact) =>{console.log('new contact creted in db')})
  
   if (Object.keys(contact.errors).length === 0){
   $(function() {
@@ -32,9 +27,6 @@ function submitNewContact() {
               newContactForm: Object.assign({}, CONTACT_TEMPLATE),
               contacts: state.contacts.slice(0).concat(contact),
           });
-        // $('<li></li>').text(dream).appendTo('ul#dreams');
-        // $('input').val('');
-        // $('input').focus();
       });
   })
   //if (contact.name && contact.email) {

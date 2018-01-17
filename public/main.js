@@ -1,19 +1,4 @@
-/*
-    * Constants
-    */
 
-/*
-     * Data
-     */
-
-    /*  var contacts = [
-      {key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn"},
-      {key: 2, name: "Jim", email: "jim@example.com"},
-      {key: 3, name: "Joe"},
-    ]
-
-    var newContact = {name: "", email: "", description: ""}
-    */
 var CONTACT_TEMPLATE = {
      name: "", email: "", description: "", errors: null 
     };
@@ -22,8 +7,7 @@ var state = {
     transitioning: false,
     location: null,
     contacts: [
-        { key: "1", name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn" },
-        { key: "2", name: "Jim", email: "jim@example.com" },
+      
     ],
     contactForms: {},
     newContactForm: Object.assign({},CONTACT_TEMPLATE),
@@ -41,18 +25,6 @@ function setState(changes) {
         );
     }
 }
-/*
-// Set initial data
-setState({
-    contacts: [
-        { key: 1, name: "James K Nelson", email: "james@jamesknelson.com", description: "Front-end Unicorn" },
-        { key: 2, name: "Jim", email: "jim@example.com" },
-    ],
-    newContact: Object.assign({}, CONTACT_TEMPLATE),
-    location: window.location.hash
-});*/
-
-
 // Handle browser navigation events
 window.addEventListener('hashchange', navigated, false);
 // Start the app
