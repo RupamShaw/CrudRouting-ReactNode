@@ -4,6 +4,17 @@ var Application = React.createClass({
     propTypes: {
       location: React.PropTypes.array.isRequired,
     },
+    componentWillMount: function() {
+      $(function() {
+        
+        console.log('get all contacts from Apllicaton compwillmount ');
+           $.get('/contacts', (res) => {
+            console.log(res)
+            setState({contacts:res})
+           })
+      
+      })
+    },
   
     render: function() {
         console.log('in app render ',this.props)

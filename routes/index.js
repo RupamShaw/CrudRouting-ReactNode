@@ -21,12 +21,34 @@ description  :{
 }) 
 
 var Contact = mongoose.model('contactpers',contactSchema)
-
 var router =express.Router()
 
 router.get('/', function (request, response) {
+  Contact.find(function(err, contact) {
+    console.log('in get list',contact)})
     response.sendFile(__dirname + '/views/index.html');
 });
+router.get('/contacts', function (request, response) {
+  console.log("in get contacts")
+  Contact.find(function(err, contacts) {
+    //console.log('in get list',contacts)
+    console.log('before sending response json',contacts)
+    response.json(contacts.map((x,v) =>{
+      return{key: v+1+"",
+             name: x.name,
+             email: x.email,
+             description:x.description,
+             id: v+1+""
+      }
+  
+    }))
+    
+    
+  })
+      
+  })
+    
+//});
 
 router.post('/updatecontact',function(request,response){
   console.log("update req query ********")
