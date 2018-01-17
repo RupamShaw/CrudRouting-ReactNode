@@ -1,4 +1,4 @@
-
+//var Contact = require('../models/contact-model')
 function updateNewContact(contact) {
   setState({ newContactForm: contact });
 }
@@ -11,18 +11,37 @@ function _addValidationToContact(contact) {
     contact.errors.email = ["Please enter your new contact's email"]
   }
 }
+
 function submitNewContact() {
   var contact = Object.assign({}, state.newContactForm, { key: state.contacts.length + 1+"", errors: {} });
   _addValidationToContact(contact);
+  console.log("tosave contacts name", contact.name,' objkeycontacterr lntg ',Object.keys(contact.errors).length,' contact.errors ',contact.errors )
+  // new Contact({ 
+  //   name: contact,name,
+  //   email:contact.email,
+  //   description:contact.description
+  // }).save().then((newContact) =>{console.log('new contact creted in db')})
+ 
+  if (Object.keys(contact.errors).length === 0){
+  $(function() {
+    var d ={contact: contact}
+    console.log('new contact from react ',d);
+       $.post('/newcontact?' + $.param(d), function(res) {
+         console.log('res got from server ',res)
+         setState({
+              newContactForm: Object.assign({}, CONTACT_TEMPLATE),
+              contacts: state.contacts.slice(0).concat(contact),
+          });
+        // $('<li></li>').text(dream).appendTo('ul#dreams');
+        // $('input').val('');
+        // $('input').focus();
+      });
+  })
   //if (contact.name && contact.email) {
-  setState(
-    Object.keys(contact.errors).length === 0
-      ? {
-        newContactForm: Object.assign({}, CONTACT_TEMPLATE),
-        contacts: state.contacts.slice(0).concat(contact),
-      }
-      : { newContactForm: contact }
-  );
+  }else {
+     console.log('in error length',contact.errors)
+      setState({ newContactForm: contact });
+  }
 }
 
 function updateContactForm(contact) {
@@ -53,17 +72,27 @@ function submitContactForm() {
     var update = { contactForms: contactForms };
 
     if (Object.keys(contact.errors).length === 0) {
-      delete contactForms[key];
-      update.contacts = state.contacts.slice(0).map(function (x) {
-        return x.key == key ? contact : x
-      });
-
-      startNavigating('/contacts');
+      $(function() {
+        var d ={contact: contactForms[key]}
+        console.log('update contact from react ',d);
+           $.post('/updatecontact?' + $.param(d), function(res) {
+             console.log('res got from server ',res)
+             delete contactForms[key];
+             update.contacts = state.contacts.slice(0).map(function (x) {
+               return x.key == key ? contact : x
+             });
+             console.log('key ',key)
+             startNavigating('/contacts');
+             setState(update);
+            });
+      })
     }
     else {
       contactForms[key] = contact;
-    }
-
-    setState(update);
+    console.log('contactforms[key]', contactForms[key])
+    setState(update); 
+  }
+    console.log('update', update )
+   
   }
 }
