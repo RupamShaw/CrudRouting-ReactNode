@@ -1,6 +1,13 @@
+import React  from 'react';
+import ContactForm from './ContactForm'
+import ContactItem from './ContactItem'
+//import PropTypes from 'prop-types';
+var createReactClass = require('create-react-class');
 //contactaView Component
+//var ContactsView = createReactClass({
 var ContactsView = React.createClass({
-    propTypes: {
+
+  propTypes: {
         contacts: React.PropTypes.array.isRequired,
         newContactForm: React.PropTypes.object.isRequired,
         onChangeContact: React.PropTypes.func.isRequired,
@@ -8,6 +15,7 @@ var ContactsView = React.createClass({
     },
 
     render: function () {
+      console.log('incontactsview render')
         /*   var contactItemElements = this.props.contacts
            .filter(function(contact) { return contact.email })
            .map(function(contact) { return  React.createElement(ContactItem, Object.assign({}, contact, {id: contact.key})); });
@@ -34,3 +42,4 @@ var ContactsView = React.createClass({
         )
     },
 })
+export default ContactsView

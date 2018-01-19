@@ -1,3 +1,6 @@
+import {setState, state, CONTACT_TEMPLATE} from './statemgmt' 
+import { startNavigating } from './navigation'
+import $ from 'jquery'
 //var Contact = require('../models/contact-model')
 function updateNewContact(contact) {
   setState({ newContactForm: contact });
@@ -87,4 +90,12 @@ function submitContactForm() {
     console.log('update', update )
    
   }
+}
+export{
+updateNewContact,
+  _addValidationToContact,
+  submitNewContact,
+  updateContactForm,
+  submitContactForm
+  
 }

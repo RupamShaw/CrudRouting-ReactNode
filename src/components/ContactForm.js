@@ -1,6 +1,11 @@
-    //contactform component
-    var ContactForm = React.createClass({
-        propTypes: {
+import React  from 'react';    
+//import PropTypes from 'prop-types';
+var createReactClass = require('create-react-class');
+//contactform component
+  //  var ContactForm = createReactClass({
+  var ContactForm = React.createClass({
+        
+propTypes: {
           //contact: React.PropTypes.object.isRequired,
           value: React.PropTypes.object.isRequired,
           onChange: React.PropTypes.func.isRequired,
@@ -38,6 +43,7 @@
         },
         
         render: function() {
+          console.log('in contactform render')
           var errors = this.props.value.errors || {};
   
           // var oldContact = this.props.value;
@@ -85,4 +91,6 @@
         
         
       })
+    
+  export default ContactForm
   

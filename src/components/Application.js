@@ -1,8 +1,18 @@
-
-
+import React  from 'react';  
+import {setState} from '../actions/statemgmt' 
+import ContactView from './ContactView'
+import ContactsView from './ContactsView'
+import {updateNewContact,
+  _addValidationToContact,
+  submitNewContact,
+  updateContactForm,
+  submitContactForm} from '../actions/contact'
+import PropTypes from 'prop-types';
+import $ from 'jquery'
+//var createReactClass = require('create-react-class');
 var Application = React.createClass({
     propTypes: {
-      location: React.PropTypes.array.isRequired,
+      location: React.PropTypes.array.isRequired
     },
     componentWillMount: function() {
       $(function() {
@@ -15,7 +25,7 @@ var Application = React.createClass({
     },
   
     render: function() {
-        console.log('in app render ',this.props)
+      console.log('in app render ',this.props)
       switch (this.props.location[0]) {
         case 'contacts':
           if (this.props.location[1]) {
@@ -47,6 +57,6 @@ var Application = React.createClass({
     },
   });
   
-  
+export default Application
   
   

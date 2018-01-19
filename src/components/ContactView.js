@@ -1,4 +1,7 @@
-
+import React  from 'react';
+import ContactForm from './ContactForm'
+//import PropTypes from 'prop-types';
+var createReactClass = require('create-react-class');
 var ContactView = React.createClass({
     propTypes: {
         onChangeContact: React.PropTypes.func.isRequired,
@@ -29,3 +32,5 @@ var ContactView = React.createClass({
         )
     },
 });
+
+export default ContactView

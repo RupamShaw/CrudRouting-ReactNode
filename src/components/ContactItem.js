@@ -1,4 +1,7 @@
-  // contact list component
+import React  from 'react';
+import PropTypes from 'prop-types';
+var createReactClass = require('create-react-class');
+// contact list component
 var ContactItem = React.createClass({
     propTypes: {
       id: React.PropTypes.string.isRequired,
@@ -23,3 +26,4 @@ var ContactItem = React.createClass({
   },
 })
 
+export default ContactItem

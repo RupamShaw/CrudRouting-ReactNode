@@ -1,5 +1,27 @@
 var express = require('express');
 var mongoose = require('mongoose')
+/*const MongoClient = require('mongodb').MongoClient;
+const MONGO_URL = 'mongodb://hello:hello@ds255767.mlab.com:55767/contact'
+MongoClient.connect(MONGO_URL, function (err, client) {
+ 
+  if (err) throw err;
+
+  var db = client.db('contact');
+
+  db.collection('notes').insertOne(
+    {
+      title: 'Hello MongoDB',
+      text: 'Hopefully this works!'
+    },
+    function (findErr, result) {
+    if (findErr) throw findErr;
+    console.log(result);
+    client.close();
+      
+  });
+  
+}); */
+
 mongoose.connect("mongodb://contactuser:contactUser@ds255767.mlab.com:55767/contact", { useMongoClient: true }, () => {
   console.log('connected to mongodb')
 })
@@ -21,6 +43,7 @@ var contactSchema = new Schema({
 })
 
 var Contact = mongoose.model('contactpers', contactSchema)
+
 var router = express.Router()
 
 router.get('/', function (request, response) {
@@ -28,10 +51,11 @@ router.get('/', function (request, response) {
 });
 
 router.get('/contacts', function (request, response) {
-  console.log("in get contacts")
+  console.log("in server get /contacts")
   Contact.find(function (err, contacts) {
     //console.log('in get list',contacts)
     console.log('before sending response json', contacts)
+    
     var obj ={}
     response.json(contacts.map((x, v) => {
       

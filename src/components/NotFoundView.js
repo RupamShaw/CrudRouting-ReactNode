@@ -1,3 +1,6 @@
+import React  from 'react';
+import PropTypes from 'prop-types';
+var createReactClass = require('create-react-class');
 var NotFoundView = React.createClass({
     propTypes: {},
   
@@ -9,3 +12,4 @@ var NotFoundView = React.createClass({
       )
     },
   });
+export default NotFoundView
